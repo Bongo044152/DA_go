@@ -1,6 +1,20 @@
 #include "pq.h"
 #include <stdio.h>
 #include <stdlib.h>
+static void swap(void **a, void **b){
+    void *temp = *a;
+    *a = *b;
+    *b = temp;
+}
+static int parent(int index){
+    return (index-1)/2;
+}
+static int leftchild(int index){
+    return index*2+1;
+}
+static int rightchild(int index){
+    return index*2+2;
+}
 static void heap(pq *p,int index,Compare cmp){
     if(p-> mode == 1){
         while(index <= p->size-1){
@@ -38,20 +52,6 @@ static void heap(pq *p,int index,Compare cmp){
             else break;
         }
     }
-}
-static void swap(void **a, void **b){
-    void *temp = *a;
-    *a = *b;
-    *b = temp;
-}
-static int parent(int index){
-    return (index-1)/2;
-}
-static int leftchild(int index){
-    return index*2+1;
-}
-static int rightchild(int index){
-    return index*2+2;
 }
 void initpq(pq *p, int capacity,int mode){
     p->data = (void**)malloc(sizeof(void*)*capacity);
@@ -95,8 +95,8 @@ void *pop(pq *p,Compare cmp){
     return res;
 };
 void deletedata(pq *p, int index,Compare cmp){
-    if(!p || index>=p->size) return;
-    if(p->size==1){
+    if(!p || index >= p->size) return;
+    if(p->size == 1){
         p->size--;
         return;
     }
@@ -104,9 +104,13 @@ void deletedata(pq *p, int index,Compare cmp){
     p->size--;
     heap(p,index,cmp);
 }
-void build_by_array(pq *p, void **data){
-    if(!p) return;
-    for(int i=0;i<p->size;i++){
+void build_by_array(pq *p, void **data,int arrsize,Compare cmp){
+    if(!p && arrsize>=p->capacity) return;
+    for(int i=0;i<arrsize;i++){
         p->data[i] = data[i];
+    }
+     p->size = arrsize;
+    for(int i = (arrsize-1)/2; i >= 0; i--){
+        heap(p, i, cmp);
     }
 };
