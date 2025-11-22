@@ -100,12 +100,12 @@ void deletedata(pq *p, int index,Compare cmp){
         p->size--;
         return;
     }
-    p->data[index] = p->data[p->size-1];
+    swap(&p->data[index],&p->data[p->size-1]);
     p->size--;
     heap(p,index,cmp);
 }
 void build_by_array(pq *p, void **data,int arrsize,Compare cmp){
-    if(!p && arrsize>=p->capacity) return;
+    if(!p || arrsize>=p->capacity) return;
     for(int i=0;i<arrsize;i++){
         p->data[i] = data[i];
     }
