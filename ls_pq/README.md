@@ -6,7 +6,7 @@
 
 ## 功能特性
 
-- 支援任意資料型態（存入items[]裡，為void*）
+- 支援任意資料型態（存入`items[]`裡，為`void*`）
 - 可選擇 **Min-Heap** 或 **Max-Heap**
 - 支援從陣列直接建構 Heap (禁止單個插入)
 - 提供基本操作：
@@ -14,9 +14,9 @@
   - 刪除元素 `deletedata`
   - 堆化 `heapify`
   - 取出最大/最小元素 `pop`
-  - 從陣列建構 Heap `buildbyarray`
+    - 從陣列建構 Heap `buildbyarray`
 
----
+    ---
 
 ## 資料結構定義
 
@@ -40,8 +40,18 @@ typedef struct {
 
 ## 建議編譯指令
 
-- 將pq.c編譯成.o檔：gcc -c src/pq.c -o /build/pq.o
-- 編譯成lib：ar rcs lib/libmylib.a build/pq.o 
-- 編譯main.c：gcc -g main.c lib/libmylib.a  (-g為方便debug)
+第一步：將 pq.c 編譯成 .o 檔
+
+      gcc -c src/pq.c -o /build/pq.o
+第二步：編譯成 lib
+
+       ar rcs lib/libmylib.a build/pq.o 
+
+第三步：編譯 main.c
+
+       gcc -g main.c lib/libmylib.a 
 
 ---
+## 作者
+
+Ls <alanson888@gmail.com>
