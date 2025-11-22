@@ -96,6 +96,10 @@ void *pop(pq *p,Compare cmp){
 };
 void deletedata(pq *p, int index,Compare cmp){
     if(!p || index>=p->size) return;
+    if(p->size==1){
+        p->size--;
+        return;
+    }
     p->data[index] = p->data[p->size-1];
     p->size--;
     heap(p,index,cmp);
