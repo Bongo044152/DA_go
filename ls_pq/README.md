@@ -14,10 +14,10 @@
   - 刪除元素 `deletedata`
   - 堆化 `heapify`
   - 取出最大/最小元素 `pop`
-    - 從陣列建構 Heap `buildbyarray`
+  - 從陣列建構 Heap `buildbyarray`
 
-    ---
-
+    
+---
 ## 資料結構定義
 
 ```c
@@ -42,14 +42,15 @@ typedef struct {
 
 第一步：將 pq.c 編譯成 .o 檔
 
-      gcc -c src/pq.c -o /build/pq.o
+    gcc -c src/pq.c -o /build/pq.o
+
 第二步：編譯成 lib
 
-       ar rcs lib/libmylib.a build/pq.o 
+    ar rcs lib/libmylib.a build/pq.o 
 
 第三步：編譯 main.c
 
-       gcc -g main.c lib/libmylib.a 
+    gcc -g main.c lib/libmylib.a 
 
 ---
 ## 作者
