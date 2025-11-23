@@ -30,12 +30,13 @@ int main(){
         printf("%d ",*val);
     }
     printf("\n");
-    printf("After deleting index 1(max):\n");
+    initpq(&p, 10, 1);
     push(&p,&arr[0],IntCompare);
     push(&p,&arr[1],IntCompare);
     push(&p,&arr[2],IntCompare);
-    push(&p,&arr[3],IntCompare); 
+    push(&p,&arr[3],IntCompare);
     deletedata(&p,1,IntCompare);
+    printf("After deleting index 1(max):\n");
     while(p.size>0){
         int *val = (int*)pop(&p,IntCompare);
         printf("%d ",*val);
