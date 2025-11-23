@@ -6,7 +6,7 @@ int IntCompare(const void *a,const void *b){
 }
 int main(){
     pq p,q,array;
-    int arr[] = {5,3,8,1,4,7,2,6,4,3,9,0};
+    int arr[] = {5,3,8,1,4,7,2,6,4,3};
     initpq(&p,10,1);
     initpq(&q,10,0);
     initpq(&array,10,1);
@@ -42,8 +42,12 @@ int main(){
     }
     printf("\n");
     printf("build by array(max):\n");
-    build_by_array(&array,(void**) arr,sizeof(arr)/sizeof(int),IntCompare);
-    //printf("%d",array.size);
+    int array_size = sizeof(arr)/sizeof(int);
+    void **data_array = (void**)malloc(sizeof(void*) * array_size);
+    for(int i = 0; i < array_size; i++){
+        data_array[i] = &arr[i];
+    }
+    build_by_array(&array,data_array,array_size,IntCompare);
     while(array.size>0){
         int *val = (int*)pop(&array,IntCompare);
         printf("%d ",*val);

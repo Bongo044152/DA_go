@@ -61,7 +61,7 @@ void initpq(pq *p, int capacity,int mode){
 }
 void push(pq *p, void *data,Compare cmp){
     if(!p || p->capacity-1 == p->size) return;
-    if(p->size==0){
+    if(p->size == 0){
         p->data[0] = data;
         p->size++;
         return;
@@ -69,7 +69,7 @@ void push(pq *p, void *data,Compare cmp){
     p->data[p->size] = data;
     int index = p->size;
     p->size++;
-    if(p->mode==1){
+    if(p->mode == 1){
         while(index>0 && cmp(p->data[index],p->data[parent(index)])>0){
             swap(&p->data[index],&p->data[parent(index)]);
             index = parent(index);
@@ -84,7 +84,7 @@ void push(pq *p, void *data,Compare cmp){
 };
 void *pop(pq *p,Compare cmp){
     if(!p || p->size == 0) return NULL;
-    if(p->size==1){
+    if(p->size == 1){
         p->size--;
         return p->data[0];
     }
@@ -105,7 +105,7 @@ void deletedata(pq *p, int index,Compare cmp){
     heap(p,index,cmp);
 }
 void build_by_array(pq *p, void **data,int arrsize,Compare cmp){
-    if(!p || arrsize>=p->capacity) return;
+    if(!p || arrsize>p->capacity) return;
     for(int i=0;i<arrsize;i++){
         p->data[i] = data[i];
     }
