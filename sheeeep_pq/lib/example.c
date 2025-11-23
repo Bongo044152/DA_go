@@ -1,4 +1,4 @@
-#include "pq.h"
+#include "../include/pq.h"
 #include <stdio.h>
 #include <stdlib.h>
 int IntCompare(const void *a,const void *b){

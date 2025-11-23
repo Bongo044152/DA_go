@@ -1,4 +1,4 @@
-#include "pq.h"
+#include "../include/pq.h"
 #include <stdio.h>
 #include <stdlib.h>
 static void swap(void **a, void **b){

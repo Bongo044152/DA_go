@@ -11,8 +11,8 @@
 ## 運行指令
 
 ```
-gcc -c pq.c
-ar rcs libpq.a pq.o
-gcc -g example.c libpq.a
+gcc -c src\pq.c -o \build\pq.o
+ar rcs lib\pqlib.a build\pq.o
+gcc -g example.c lib\libpq.a
 ./a
 ```
