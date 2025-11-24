@@ -88,10 +88,6 @@ void PQ_bubble_down(PriorityQueue* pq, int index) {
 }
 
 void PQ_switch_mode(PriorityQueue* pq, PQ_mode mode) {
-    if(pq->mode == mode) {
-        return;
-    }
-    
     pq->mode = mode;
     for(int i = (pq->size - 1) / 2 ; i>= 0 ; --i) {
         PQ_bubble_down(pq, i);
