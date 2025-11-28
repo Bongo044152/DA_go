@@ -5,7 +5,7 @@ typedef struct pq{
     void **data;
     int capacity;
     int size;
-    int mode;
+    int mode; //用於判定max或min堆，1為max堆，0為min堆
 }pq;
 void initpq(pq *p, int capacity,int mode);
 void push(pq *p, void *data,Compare cmp);

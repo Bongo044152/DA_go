@@ -106,11 +106,11 @@ void deletedata(pq *p, int index,Compare cmp){
 }
 void build_by_array(pq *p, void **data,int arrsize,Compare cmp){
     if(!p || arrsize>p->capacity) return;
-    for(int i=0;i<arrsize;i++){
+    for(int i = 0; i < arrsize; i++){
         p->data[i] = data[i];
     }
      p->size = arrsize;
-    for(int i = (arrsize-1)/2; i >= 0; i--){
+    for(int i = ((arrsize-1)-1)/2; i >= 0; i--){
         heap(p, i, cmp);
     }
 };
