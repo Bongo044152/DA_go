@@ -60,7 +60,7 @@ void initpq(pq *p, int capacity,int mode){
     p->mode = mode;
 }
 void push(pq *p, void *data,Compare cmp){
-    if(!p || p->capacity-1 == p->size) return;
+    if(!p || p->capacity == p->size) return;
     if(p->size == 0){
         p->data[0] = data;
         p->size++;

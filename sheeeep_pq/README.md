@@ -11,8 +11,15 @@
 ## 運行指令
 
 ```
+(Windows)
 gcc -c src\pq.c -o \build\pq.o
-ar rcs lib\pqlib.a build\pq.o
-gcc -g example.c lib\libpq.a
+ar rcs lib\libpq.a build\pq.o
+gcc lib\example.c lib\libpq.a
 ./a
+
+(Linux)
+gcc -c src/pq.c -o /build/pq.o
+ar rcs lib/libpq.a build/pq.o
+gcc lib/example.c lib/libpq.a
+./a.out
 ```
