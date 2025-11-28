@@ -40,10 +40,7 @@ void *pop(pq_t *pq)
     void *result = pq->items[0];
     swap(&pq->items[0], &pq->items[pq->size - 1]);
     pq->size--;
-    if (pq->type == PQ_MAX_HEAP)
-        heapify(pq, 0);
-    else
-        heapify(pq, 0);
+    heapify(pq, 0);
 
     return result;
 }
@@ -56,15 +53,10 @@ void buildbyarray(pq_t *pq, void **data)
         pq->items[i] = &data[i];
     }
     pq->size = pq->capacity;
-    if (pq->type == PQ_MAX_HEAP) {
-        for (int i = (pq->size - 1) / 2; i >= 0;
-             i--) {  // 略過葉子節點 因為葉子節點不用heapify(沒有左右兒子)
-            heapify(pq, i);
-        }
-    } else {
-        for (int i = (pq->size - 1) / 2; i >= 0; i--) {
-            heapify(pq, i);
-        }
+
+    for (int i = (pq->size - 1) - 1 / 2; i >= 0;
+         i--) {  // 略過葉子節點 因為葉子節點不用heapify(沒有左右兒子)
+        heapify(pq, i);
     }
 }
 void deletedata(pq_t *pq, int index)
@@ -74,10 +66,7 @@ void deletedata(pq_t *pq, int index)
 
     swap(&pq->items[index], &pq->items[pq->size - 1]);
     pq->size--;
-    if (pq->type == PQ_MAX_HEAP)
-        heapify(pq, index);
-    else
-        heapify(pq, index);
+    heapify(pq, index);
 }
 void heapify(pq_t *pq, int index)
 {
