@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./include/pq.h"
+#include "pq.h"  //編譯時使用gcc -I
 
 int compare(const void *a, const void *b)
 {

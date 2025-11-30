@@ -1,6 +1,8 @@
+#include <assert.h>  //for assert
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/pq.h"
+#include "pq.h"  //編譯時使用gcc -I
+
 static int getParent(int index)
 {
     return (index - 1) / 2;
@@ -22,8 +24,9 @@ static void swap(void **a, void **b)
 
 void init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp)
 {
-    pq->capacity = capacity;
     pq->items = (void **) malloc(capacity * sizeof(void *));  // 每個索引存void*
+    assert(pq->items != NULL);
+    pq->capacity = capacity;
     pq->size = 0;
     pq->type = type;
     pq->cmp = cmp;
@@ -100,6 +103,30 @@ void heapify(pq_t *pq, int index)
         if (index != min) {
             swap(&pq->items[min], &pq->items[index]);  // 更新根結點
             heapify(pq, min);
+        }
+    }
+}
+void insert(pq_t *pq, void *data)
+{
+    if (!pq || pq->size >= pq->capacity)
+        return;
+    if (pq->size == 0) {
+        pq->items[pq->size++] = data;
+        return;
+    }
+    pq->items[pq->size++] = data;
+    int idx = pq->size - 1;
+    if (pq->type == PQ_MAX_HEAP) {
+        while (idx > 0 &&
+               pq->cmp(pq->items[idx], pq->items[getParent(idx)]) > 0) {
+            swap(&pq->items[idx], &pq->items[getParent(idx)]);
+            idx = getParent(idx);
+        }
+    } else {
+        while (idx > 0 &&
+               pq->cmp(pq->items[idx], pq->items[getParent(idx)]) < 0) {
+            swap(&pq->items[idx], &pq->items[getParent(idx)]);
+            idx = getParent(idx);
         }
     }
 }
