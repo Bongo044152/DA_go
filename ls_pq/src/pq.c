@@ -21,15 +21,20 @@ static void swap(void **a, void **b)
     *b = temp;
 }
 
-void init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp)
+int init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp)
 {
-    pq->items = (void **) malloc(capacity * sizeof(void *));  // 每個索引存void*
-    if (pq->items == NULL)
-        return;
-    pq->capacity = capacity;
-    pq->size = 0;
-    pq->type = type;
-    pq->cmp = cmp;
+    if (capacity > 0) {
+        pq->items =
+            (void **) malloc(capacity * sizeof(void *));  // 每個索引存void*
+        if (pq->items == NULL)
+            return PQ_FAIL;
+        pq->capacity = capacity;
+        pq->size = 0;
+        pq->type = type;
+        pq->cmp = cmp;
+        return PQ_OK;
+    }
+    return PQ_FAIL;
 }
 
 void *pop(pq_t *pq)

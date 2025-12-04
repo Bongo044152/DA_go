@@ -1,6 +1,7 @@
 #ifndef ___pq___
 #define ___pq___
-
+#define PQ_OK 0
+#define PQ_FAIL -1
 typedef enum {
     PQ_MIN_HEAP = 0,
     PQ_MAX_HEAP = 1
@@ -18,7 +19,7 @@ typedef struct {
 } pq_t;
 
 
-void init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp);
+int init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp);
 void *pop(pq_t *pq);
 void buildbyarray(pq_t *pq, void **data, int arrsize);
 void deletedata(pq_t *pq, int index);

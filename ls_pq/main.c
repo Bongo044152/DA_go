@@ -11,8 +11,14 @@ int main(void)
 {
     pq_t p;
     pq_t q;
-    init(&p, 10, PQ_MAX_HEAP, compare);
     printf("======================MAX-HEAP-TEST======================\n");
+    printf("INITIAL STATUS: ");
+    if (init(&p, 10, PQ_MAX_HEAP, compare) == PQ_FAIL) {
+        printf("FAILED!!\n");
+        exit(1);
+    } else {
+        printf("SUCCESS!!\n");
+    }
     int arr[] = {3, 17, 8,  25, 14,
                  9, 1,  32, 6,  20};  //[32, 25, 9, 17, 20, 8, 1, 3, 6, 14]
     int size = sizeof(arr) / sizeof(arr[0]);
@@ -40,9 +46,15 @@ int main(void)
     for (int i = 0; i < p.size; i++) {
         printf("%d ", *(int *) p.items[i]);
     }
-    printf("\n======================TEST-COMPLETE======================\n");
+    printf("\n======================TEST-COMPLETE======================\n\n");
     printf("======================MIN-HEAP-TEST======================\n");
-    init(&q, 10, PQ_MIN_HEAP, compare);
+    printf("INITIAL STATUS: ");
+    if (init(&q, 10, PQ_MIN_HEAP, compare) == PQ_FAIL) {
+        printf("FAILED!!\n");
+        exit(1);
+    } else {
+        printf("SUCCESS!!\n");
+    }
     buildbyarray(&q, data, size);
     printf("MIN-HEAP: ");
     for (int i = 0; i < q.size; i++) {
