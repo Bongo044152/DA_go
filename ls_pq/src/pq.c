@@ -1,4 +1,3 @@
-#include <assert.h>  //for assert
 #include <stdio.h>
 #include <stdlib.h>
 #include "pq.h"  //編譯時使用gcc -I
@@ -25,7 +24,8 @@ static void swap(void **a, void **b)
 void init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp)
 {
     pq->items = (void **) malloc(capacity * sizeof(void *));  // 每個索引存void*
-    assert(pq->items != NULL);
+    if (pq->items == NULL)
+        return;
     pq->capacity = capacity;
     pq->size = 0;
     pq->type = type;
@@ -34,7 +34,7 @@ void init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp)
 
 void *pop(pq_t *pq)
 {
-    if (!pq)
+    if (!pq || pq->size == 0)
         return NULL;
     if (pq->size == 1) {
         pq->size--;
@@ -48,23 +48,22 @@ void *pop(pq_t *pq)
     return result;
 }
 
-void buildbyarray(pq_t *pq, void **data)
+void buildbyarray(pq_t *pq, void **data, int arrsize)
 {
-    if (pq->size >= pq->capacity)
+    if (arrsize > pq->capacity)
         return;
-    for (int i = 0; i < pq->capacity; i++) {
-        pq->items[i] = &data[i];
+    for (int i = 0; i < arrsize; i++) {
+        pq->items[i] = data[i];
     }
-    pq->size = pq->capacity;
-
-    for (int i = (pq->size - 1) - 1 / 2; i >= 0;
+    pq->size = arrsize;
+    for (int i = getParent(pq->size - 1); i >= 0;
          i--) {  // 略過葉子節點 因為葉子節點不用heapify(沒有左右兒子)
         heapify(pq, i);
     }
 }
 void deletedata(pq_t *pq, int index)
 {
-    if (!pq)
+    if (!pq || pq->size == 0)
         return;
 
     swap(&pq->items[index], &pq->items[pq->size - 1]);

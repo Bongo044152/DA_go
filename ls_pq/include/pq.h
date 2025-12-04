@@ -20,7 +20,7 @@ typedef struct {
 
 void init(pq_t *pq, int capacity, pqtype_t type, cmpf cmp);
 void *pop(pq_t *pq);
-void buildbyarray(pq_t *pq, void **data);
+void buildbyarray(pq_t *pq, void **data, int arrsize);
 void deletedata(pq_t *pq, int index);
 void heapify(pq_t *pq, int index);
 void insert(pq_t *pq, void *data);

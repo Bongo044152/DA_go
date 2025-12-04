@@ -13,9 +13,14 @@ int main(void)
     pq_t q;
     init(&p, 10, PQ_MAX_HEAP, compare);
     printf("======================MAX-HEAP-TEST======================\n");
-    int arr[10] = {3, 17, 8,  25, 14,
-                   9, 1,  32, 6,  20};  //[32, 25, 9, 17, 20, 8, 1, 3, 6, 14]
-    buildbyarray(&p, (void **) arr);
+    int arr[] = {3, 17, 8,  25, 14,
+                 9, 1,  32, 6,  20};  //[32, 25, 9, 17, 20, 8, 1, 3, 6, 14]
+    int size = sizeof(arr) / sizeof(arr[0]);
+    void **data = (void **) malloc(sizeof(void *) * size);
+    for (int i = 0; i < size; i++) {
+        data[i] = &arr[i];  // void*可存任意類型指標 只需取出時轉換正確
+    }
+    buildbyarray(&p, data, size);
     printf("MAX-HEAP: ");
     for (int i = 0; i < p.size; i++) {
         printf("%d ", *(int *) p.items[i]);
@@ -38,7 +43,7 @@ int main(void)
     printf("\n======================TEST-COMPLETE======================\n");
     printf("======================MIN-HEAP-TEST======================\n");
     init(&q, 10, PQ_MIN_HEAP, compare);
-    buildbyarray(&q, (void **) arr);
+    buildbyarray(&q, data, size);
     printf("MIN-HEAP: ");
     for (int i = 0; i < q.size; i++) {
         printf("%d ", *(int *) q.items[i]);
@@ -50,7 +55,7 @@ int main(void)
         printf("%d ", *(int *) q.items[i]);
     }
     printf("\n");
-    printf("THE MAX ITEM: ");
+    printf("THE MIN ITEM: ");
     printf("%d", *(int *) item2);
     printf("\n");
     deletedata(&q, 5);
