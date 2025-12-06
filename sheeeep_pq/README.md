@@ -10,38 +10,38 @@
 
 ## 建議編譯指令
 
-(Windows)
-### 第一步：將 pq.c 編譯成 .o 檔
+### (Windows)
+#### 第一步：將 pq.c 編譯成 .o 檔
 ```
 gcc -c src\pq.c -o \build\pq.o
 ```
-### 第二步：建立靜態函式庫
+#### 第二步：建立靜態函式庫
 ```
 ar rcs lib\libpq.a build\pq.o
 ```
-### 第三步：編譯 main.c 並連結函式庫
+#### 第三步：編譯 example.c 並連結函式庫
 ```
 gcc lib\example.c lib\libpq.a
 ```
-### 第四步：執行程式
+#### 第四步：執行程式
 ```
 ./a
 ```
 
-(Linux)
-### 第一步：將 pq.c 編譯成 .o 檔
+### (Linux)
+#### 第一步：將 pq.c 編譯成 .o 檔
 ```
 gcc -c src/pq.c -o /build/pq.o
 ```
-### 第二步：建立靜態函式庫
+#### 第二步：建立靜態函式庫
 ```
 ar rcs lib/libpq.a build/pq.o
 ```
-### 第三步：編譯 example.c 並連結函式庫
+#### 第三步：編譯 example.c 並連結函式庫
 ```
 gcc lib/example.c lib/libpq.a
 ```
-### 第四步：執行程式
+#### 第四步：執行程式
 ```
 ./a.out
 ```
